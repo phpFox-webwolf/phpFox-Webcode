@@ -31,7 +31,7 @@ $iAdminId = $this->database()->select('user_id')->from(Phpfox::getT('user'))->wh
 $sSubject = Phpfox::getPhrase('core.welcome_internal_mail_subject', array('site' => Phpfox::getParam('core.site_title')));
 
 //Determine if you are using threaded or legacy message handling
-if(Phpfox::getParam('mail.threaded_mail_conversation'))
+if(Phpfox::getLib('setting')->isParam('mail.threaded_mail_conversation') && Phpfox::getParam('mail.threaded_mail_conversation'))
 {
 	//If using threaded messages, set up users for this thread
 	$aUserInsert=array($iAdminId, $iId);
