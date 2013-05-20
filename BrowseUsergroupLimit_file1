@@ -1,0 +1,11 @@
+//This plugin will cause the initial page load to include only members from that user's usergroup to be displayed
+//Create a plugin file called "user.component_controller_browse_filter_process.php". 
+//This can be located in the module/user/include/plugin/ folder. 
+//Originally developed on phpFox v3.4
+//In the plugin, you can use this code:
+
+$iSetGroup=$oFilter->get('group');
+if($iSetGroup === null)
+{
+    $oFilter->setcondition('AND u.user_group_id = ' . phpfox::getUserBy('user_group_id'));
+} 
