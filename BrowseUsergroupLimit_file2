@@ -1,0 +1,41 @@
+// This Plugin will control what is displayed in the filter select control
+// Create a plugin file named "user.component_controller_browse_genders.php". 
+// Place it in the module/user/include/plugin/ folder and insert this code:
+// For each case, unset the user_group_ids for those groups that you don't want that user group to see.
+// Change or add unset commands to hide usergroups that you do not want to show in the select control
+// For usergroup 1 (admin), leave all groups visable.
+// You can use $aUserGroups=array(); to remove all options from the select control.
+
+if (!(defined('PHPFOX_IS_ADMIN_SEARCH')))
+{
+  switch (phpfox::getUserBy('user_group_id'))
+	{
+		case 1:
+		break;
+
+		case 2:
+		unset($aUserGroups['3']);
+		unset($aUserGroups['5']);
+		unset($aUserGroups['7']);
+		break;
+
+		case 3:
+		$aUserGroups=array();
+		break;
+
+		case 4:
+		unset($aUserGroups['3']);
+		unset($aUserGroups['5']);
+		break;
+
+		case 6:
+		unset($aUserGroups['3']);
+		unset($aUserGroups['5']);
+		break;
+
+		case 7:
+		unset($aUserGroups['3']);
+		unset($aUserGroups['5']);
+		break;
+	}
+}
