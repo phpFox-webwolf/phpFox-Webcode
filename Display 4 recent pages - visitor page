@@ -1,0 +1,44 @@
+/************************************/
+// Create a block in the admincp->CMS->block->add new block
+//
+// *Product: core
+// Module: pages
+// Title: Recent Four Pages
+// Controller: --core.index-visitor
+// Placement: Block 2
+// Active: Yes 
+/************************************/
+//Start copying after this line---
+<?php
+
+$aRows = Phpfox::getLib('database')->select('p.*, pu.vanity_url, ' . Phpfox::getUserField())
+  ->from(Phpfox::getT('pages'), 'p')
+  ->join(Phpfox::getT('user'), 'u', 'u.profile_page_id = p.page_id')
+  ->leftJoin(Phpfox::getT('pages_url'), 'pu', 'pu.page_id = p.page_id')
+  ->order('p.time_stamp DESC')
+  ->where('p.view_id = 0 AND app_id=0')
+  ->limit('4')
+  ->execute('getSlaveRows');
+		
+foreach ($aRows as $iKey => $aRow)
+{
+	$aRows[$iKey]['link'] = Phpfox::getService('pages')->getUrl($aRow['page_id'], $aRow['title'], $aRow['vanity_url']);
+}
+
+echo '<div class="block">';
+echo '<div class="title">Recent Pages:</div>';	
+
+foreach ($aRows as $aRow)
+{
+  $sUrl=Phpfox::getLib('image.helper')->display(
+	  array('user'=>$aRow,'suffix'=>'_200','max_width'=>'75','max_height'=>'75','no_link'=>true, 'is_page_image'=>true)
+	  );
+
+  echo '<div class="pages_profile_block" style="float: left; margin-bottom: 10px; margin-right: 10px; overflow: hidden; width: 75px;">';
+    echo '<a title="' . $aRow['title'] . '" href="' . $aRow['link'] . '">' . $sUrl . '</a>';
+    echo '<div><a href="' . $aRow['link'] . '" title="' . $aRow['title'] . '">' . $aRow['title'] . '</a></div>';
+  echo '</div>';
+}
+echo '</div>';
+
+?>
