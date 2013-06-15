@@ -1,0 +1,31 @@
+public function getRSVP()
+{
+	//Assign the transferred parameters to variables
+	$iId = $this->get('id');
+	$iNumReunion = $this->get('NumReunion');
+
+	//If there is an old message in the hidden result div, remove it
+	$this->call('$(\'.valid_message\').before(\'' . $this->getContent() . '\').remove();');
+	//Show the results div in anticipation of the return message
+	$this->call('$(\'#js_results\').show();');
+
+	//Update the appropriate table
+	$bGood = Phpfox::getService('mymodule')->updateField($iId, 'NumReunion', $iNumReunion);
+	//If the function returned a successful flag
+	if($bGood)
+	{
+		//Send a message to the client that the update worked
+		$this->call("$('#js_results').message('" . Phpfox::getPhrase('mymodule.rsvp_successful') . "', 'valid').fadeOut(5000);");
+		//Get the block that you are going to replace
+		Phpfox::getBlock('addressbook.rsvp');
+		//Remove the old content and load the new content
+		$this->call('$(\'#js_content\').before(\'' . $this->getContent() . '\').remove();')->call('Phpfox.loadInit();');
+
+	}
+	//If the update did not work
+	else
+	{
+		//Send a message to the client that it didn't work
+		$this->call("$('#js_results').message('" . Phpfox::getPhrase('mymodule.rsvp_failed') . "', 'error').fadeOut(5000);");
+	}
+}
