@@ -17,7 +17,7 @@ public function getRSVP()
 		//Send a message to the client that the update worked
 		$this->call("$('#js_results').message('" . Phpfox::getPhrase('mymodule.rsvp_successful') . "', 'valid').fadeOut(5000);");
 		//Get the block that you are going to replace
-		Phpfox::getBlock('addressbook.rsvp');
+		Phpfox::getBlock('mymodule.rsvp');
 		//Remove the old content and load the new content
 		$this->call('$(\'#js_content\').before(\'' . $this->getContent() . '\').remove();')->call('Phpfox.loadInit();');
 
