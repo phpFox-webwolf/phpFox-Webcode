@@ -51,7 +51,7 @@ require(PHPFOX_DIR . 'include' . PHPFOX_DS . 'init.inc.php');
 */
 if (phpFox::getUserId() != 1 )
 {
-die('UserId not authorized  You must be logged in to your site as the main administrator');
+die('UserId not authorized.  You must be logged in to your site as the main administrator.');
 }
  
 class dbfix extends Phpfox_Service
