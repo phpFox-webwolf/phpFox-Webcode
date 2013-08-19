@@ -1,13 +1,15 @@
 <?php
 
-/**
- * [PHPFOX_HEADER]
- */
-
+/*
+STEWARD WAS HERE
+Portions of this work created by stewfoxdev.com (steward at phpfox)
+Licensed under creative commons (attribution 3 unported)
+see http://creativecommons.org/licenses/by/3.0/deed.en...
+You are free to modify and use for your purposes but please leave this credit in your work.
+*/ 
 /**
  * 
  * 
- * @copyright  Open Source
  * @author     Steward/Webwolf
  * @package    User Privacy Presets/tools
  * @version    v1.0
