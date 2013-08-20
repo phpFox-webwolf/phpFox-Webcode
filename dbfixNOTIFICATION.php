@@ -7,7 +7,14 @@ Licensed under creative commons (attribution 3 unported)
 see http://creativecommons.org/licenses/by/3.0/deed.en...
 You are free to modify and use for your purposes but please leave this credit in your work.
 */ 
-
+/**
+*
+*
+* @author Steward/Webwolf
+* @package User Privacy Presets/tools
+* @version v1.0
+*/
+ 
 define('PHPFOX_DIR', dirname(dirname(__FILE__)) . PHPFOX_DS);
  
 define('PHPFOX_START_TIME', array_sum(explode(' ', microtime())));
