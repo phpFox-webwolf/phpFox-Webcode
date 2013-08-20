@@ -151,7 +151,6 @@ class dbfix extends Phpfox_Service
 			<div> ' . $sWarn . ' </div>
 			<form method="POST" name="form" id="form" action="http://' . Phpfox::getParam('core.host') . '/tools/dbfixPRIVACY.php">
 			<div><input type="hidden" name="' . $s1 . '[security_token]" value="' . $s2 . '" /></div>
-			<div><input type="hidden" name="Confirm" value="1" /></div>
 			<div style="width:400px;margin:0px auto;text-align:right;padding:15px;background-color:#eee;">
 			<input type=hidden name="offset" value="0">
 			<input type="submit" name="Confirm" value="Continue" />
