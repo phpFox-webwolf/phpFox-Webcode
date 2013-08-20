@@ -131,6 +131,7 @@ class dbfix extends Phpfox_Service
 			//add confirm form
 			$iTotUsers = $db->select('COUNT(*)')
 				->from(Phpfox::getT('user'))
+				->where('view_id = 0')
 				->execute('getField');
 			$iTotPrivacy = $db->select('COUNT(*)')
 				->from(Phpfox::getT('user_privacy'))
@@ -178,6 +179,7 @@ class dbfix extends Phpfox_Service
 			$aRows = $this->database()->select('user_id')
 				->from(Phpfox::getT('user'))
 				->order('user_id')
+				->where('view_id = 0')
 				->limit($iOffset,$iLimit)
 				->execute('getSlaveRows');
  
