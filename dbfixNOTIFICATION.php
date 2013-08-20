@@ -186,3 +186,4 @@ class dbfix extends Phpfox_Service
 $dbfix=new dbfix();
 $dbfix->run();
  
+?>
