@@ -1,8 +1,3 @@
-//This plugin will restore a friendship entry pair if the target friend is admin
-//Create a plugin file called "friend.service_process_delete__1.php".
-//This can be located in the module/user/include/plugin/ folder.
-//Originally developed on phpFox v3.4
-//In the plugin, you can use this code:
 <?php
 
   	//Define vars for user and friend.  initialize admin test var
