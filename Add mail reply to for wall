@@ -1,0 +1,29 @@
+//start
+if(strpos(Phpfox::getPhrase($this->_aSubject[0]), Phpfox::getPhrase('mail.wall_flag')))
+{
+
+$sMessage = $sMessage . '<br /><br />Please reply to: <a href="mailto:' . Phpfox::getUserBy('email') . '?Subject=Testing" target="_top">' . Phpfox::getUserBy('email') . '</a><br /><br />';
+
+						// Load plain text template
+						$sTextPlain = Phpfox::getLib('template')->assign(array(
+									'sName' => $aUser['full_name'],
+									'bHtml' => false,
+									'sMessage' => $this->_aMessagePlain !== null ? $sMessagePlain : $sMessage,
+									'sEmailSig' => $sEmailSig,
+									'bMessageHeader' => $this->_bMessageHeader,
+									'sMessageHello' => Phpfox::getPhrase('core.hello_name', array('name' => $aUser['full_name']), false, null, $aUser['language_id'])
+								)
+							)->getLayout('email', true);
+
+						// Load HTML text template
+						$sTextHtml = Phpfox::getLib('template')->assign(array(
+									'sName' => $aUser['full_name'],
+									'bHtml' => true,
+									'sMessage' => str_replace("\\\\\\\\n", "<br />", $sMessage),
+									'sEmailSig' => str_replace("\\\\\\\\n", "<br />", $sEmailSig),
+									'bMessageHeader' => $this->_bMessageHeader,
+									'sMessageHello' => Phpfox::getPhrase('core.hello_name', array('name' => $aUser['full_name']), false, null, $aUser['language_id'])
+								)
+							)->getLayout('email', true);
+}
+//end
