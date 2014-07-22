@@ -1,0 +1,16 @@
+// Look up the user_id for each friend to include. I have shown three, which you must change!!  // 
+// If you need more than three, add a row for each friend to include with new member.           // 
+// Remember to place a comma at the end of each row except for the last one.                    // 
+
+$aFriendsId = array(
+  'friend1' => 2,
+  'friend2' => 3,
+  'friend3' => 46 
+  ); 
+foreach($aFriendsId as $iFriendId) 
+{
+  $this->database()->insert(Phpfox::getT('friend'), array( 'list_id' => 0, 'user_id' => $iId, 'friend_user_id' => $iFriendId, 'time_stamp' => PHPFOX_TIME ) );
+  $this->database()->insert(Phpfox::getT('friend'), array( 'list_id' => 0, 'user_id' => $iFriendId, 'friend_user_id' => $iId, 'time_stamp' => PHPFOX_TIME ) );
+  Phpfox::getService('friend.process')->updateFriendCount($iId, $iFriendId);
+  Phpfox::getService('friend.process')->updateFriendCount($iFriendId, $iId); 
+}
