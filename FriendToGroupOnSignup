@@ -1,0 +1,36 @@
+//Set the target group Id
+$iUserGroupId = 7;
+
+//Collect an array of all group user_ids
+$aFriendsIds = Phpfox::getLib('database')->select('u.user_id')
+			->from(Phpfox::getT('user'), 'u')
+			->where('user_group_id = ' . (int) $iUserGroupId)
+			->execute('getSlaveRows');
+
+//Add any other user_ids that you want to be added
+//Add a line for each member to include as a friend.
+$aFriendsIds[]['user_id']=1;
+
+foreach($aFriendsIds as $aFriendId)
+{
+
+	$this->database()->insert(Phpfox::getT('friend'), array(
+			'list_id' => 0,
+			'user_id' => $iId,
+			'friend_user_id' => $aFriendId['user_id'],
+			'time_stamp' => PHPFOX_TIME
+		)
+	);
+				
+	$this->database()->insert(Phpfox::getT('friend'), array(
+			'list_id' => 0,
+			'user_id' => $aFriendId['user_id'],
+			'friend_user_id' => $iId,
+			'time_stamp' => PHPFOX_TIME
+		)
+	);
+
+	Phpfox::getService('friend.process')->updateFriendCount($iId, $iFriendId);
+	Phpfox::getService('friend.process')->updateFriendCount($iFriendId, $iId);
+
+}
