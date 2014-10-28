@@ -30,7 +30,7 @@ foreach($aFriendsIds as $aFriendId)
 		)
 	);
 
-	Phpfox::getService('friend.process')->updateFriendCount($iId, $iFriendId);
-	Phpfox::getService('friend.process')->updateFriendCount($iFriendId, $iId);
+	Phpfox::getService('friend.process')->updateFriendCount($iId, $aFriendId['user_id']);
+	Phpfox::getService('friend.process')->updateFriendCount($aFriendId['user_id'], $iId);
 
 }
