@@ -5,7 +5,7 @@
 //In the plugin, you can use this code:
 
 $iSetGroup=$oFilter->get('group');
-if($iSetGroup === null)
+if($iSetGroup === null && !defined('PHPFOX_IS_ADMIN_SEARCH'))
 {
     $oFilter->setcondition('AND u.user_group_id = ' . phpfox::getUserBy('user_group_id'));
 } 
