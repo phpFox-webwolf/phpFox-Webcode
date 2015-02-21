@@ -1,0 +1,29 @@
+	// Webwolf code start
+	public function onDeleteUser($iUser)
+	{
+
+		// get the ids for the photos of this user
+		$aPhotos = $this->database()->select('p.photo_id')
+			->from(Phpfox::getT('photo'), 'p')
+			->where('p.album_id=0 AND p.user_id = ' . (int)$iUser)
+			->execute('getSlaveRows');
+
+		$aAlbums = $this->database()->select('pa.album_id')
+			->from(Phpfox::getT('photo_album'), 'pa')
+			->where('pa.user_id = ' . (int)$iUser)
+			->execute('getSlaveRows');
+
+
+		foreach ($aAlbums as $aAlbum)
+		{
+			Phpfox::getService('photo.album.process')->delete($aAlbum['album_id']);
+		}
+
+		foreach ($aPhotos as $aPhoto)
+		{
+			Phpfox::getService('photo.process')->delete($aPhoto['photo_id']);
+		}
+
+		$this->database()->delete(Phpfox::getT('photo_tag'), 'tag_user_id = ' . (int)$iUser );
+	}
+	// Webwolf code end
