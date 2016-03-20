@@ -1,4 +1,3 @@
-<?php
 
   	//Define vars for user and friend.  initialize admin test var
 		$iFriendId = $aFriend['friend_user_id'];
@@ -35,4 +34,4 @@
 			Phpfox::getService('friend.process')->updateFriendCount($iId, $iFriendId);
 			Phpfox::getService('friend.process')->updateFriendCount($iFriendId, $iId);
 		}
-?>
+
